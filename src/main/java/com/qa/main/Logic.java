@@ -18,7 +18,7 @@ public class Logic {
 
 	Scanner sc = new Scanner(System.in);	
 		exit = false;
-		System.out.println("Please select a table:\nUsers[1] Products[2] Orders[3] Exit[4]\n");
+		System.out.println("Please Select One Of The Following Tables:\n1 - Users\n2 - Products\n3 - Orders\n4 - Exit");
 		int table = sc.nextInt();
 		System.out.println();
 		sc.nextLine();

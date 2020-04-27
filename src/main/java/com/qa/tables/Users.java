@@ -22,7 +22,7 @@ public class Users {
 			conn = new DBcon().call();
 			stmt = conn.createStatement();	
 		}catch (SQLException e) {
-			// TODO Auto-generated catch block
+			System.out.println("Error - Cannot connect to database");
 			e.printStackTrace();
 		}
 	}

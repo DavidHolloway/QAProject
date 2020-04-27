@@ -12,16 +12,12 @@ import com.qa.tables.Users;
 
 public class UsersMenu {
 	int userID = 0;
-	
-	
-	
+		
 	public void userMenu() {
 		Users u = new Users();
-		//DBcon db = new DBcon();
 		Scanner sc = new Scanner(System.in);
 
-		//db.connect();
-		System.out.println("Please Select an option: Create[1], Read[2], Update[3], Delete[4] Return[5]");
+		System.out.println("Please Select an option:\nCreate[1], Read[2], Update[3], Delete[4] Return[5]");
 		int op1 = sc.nextInt();
 		System.out.println();
 		sc.nextLine();
@@ -34,28 +30,24 @@ public class UsersMenu {
 			String pass = sc.nextLine();
 			System.out.println("\nPlease enter your first name:");
 			String fName = sc.nextLine();
-			System.out.println("Please enter your last name:\n");
+			System.out.println("\nPlease enter your last name:");
 			String lName = sc.nextLine();
 			u.createUser(userID, user, pass, fName, lName);
 			break;
 		case 2:
 			u.readUser();
-//			System.out.println("Press enter to return to menu");
-//			sc.nextLine();
-//			Logic l = new Logic();
-//			l.run();
 			break;
 		case 3:
 			System.out.println("Please enter your userID: ");
 			int id = sc.nextInt();
 			System.out.println();
 			sc.nextLine();
-			System.out.println("\nPlease enter the new username: ");
+			System.out.println("\nPlease enter a new username: ");
 			String name = sc.nextLine();
 			u.updateUser(id, name);
 			break;
 		case 4:
-			System.out.println("Please enter your userID: ");
+			System.out.println("Please enter the userID you would like to delete: ");
 			int idDel = sc.nextInt();
 			u.deleteUser(idDel);
 			break;

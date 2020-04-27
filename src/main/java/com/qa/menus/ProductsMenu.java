@@ -14,13 +14,13 @@ int productID = 0;
 		Scanner sc = new Scanner(System.in);
 		//p.connect();
 
-		System.out.println("Please Select an option: Create[1], Read[2], Update[3], Delete[4]");
+		System.out.println("Please Select An Option:\n1 - Create a new product\n2 - Display existing items\n3 - Update a product\n4 - Delete a product");
 		int p1 = sc.nextInt();
 		System.out.println();
 		sc.nextLine();
 		switch (p1) {
 		case 1:
-			System.out.println("Please enter product name:");
+			System.out.println("Please enter the product name:");
 			String prod = sc.nextLine();
 			System.out.println("\nPlease enter the price:");
 			double pr = sc.nextDouble();
@@ -34,10 +34,6 @@ int productID = 0;
 			break;
 		case 2:
 			p.readProduct();
-			System.out.println("Press enter to return to menu");
-			sc.nextLine();
-			Logic l = new Logic();
-			l.run();
 			break;
 		case 3:
 			System.out.println("Please enter your productID: ");
@@ -49,7 +45,7 @@ int productID = 0;
 			p.updateProduct(id, name);
 			break;
 		case 4:
-			System.out.println("Please enter your productID: ");
+			System.out.println("Please enter the productID of the item you wish to delete: ");
 			int idDel = sc.nextInt();
 			p.deleteProduct(idDel);
 			break;

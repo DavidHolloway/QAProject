@@ -6,8 +6,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import com.qa.connection.DBcon;
+import com.qa.menus.ReturnMenu;
 
 public class Products {
+	ReturnMenu rm = new ReturnMenu();
 	
 	Connection conn = null;
 	Statement stmt = null;
@@ -18,7 +20,7 @@ public class Products {
 			conn = new DBcon().call();
 			stmt = conn.createStatement();	
 		}catch (SQLException e) {
-			// TODO Auto-generated catch block
+			System.out.println("Error - Cannot connect to database");
 			e.printStackTrace();
 		}
 	}
@@ -32,6 +34,7 @@ public class Products {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		rm.returnMenu();
 	}
 
 	public void readProduct() {
@@ -43,18 +46,21 @@ public class Products {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		System.out.println("---------------------Products---------------------");
+
 		try {
 			while (rs.next()) {
 				int i1 = rs.getInt("productID");
 				String prod = rs.getString("productName");
 				Double p = rs.getDouble("price");
 				int s = rs.getInt("stock");
-				System.out.println("Product ID: " + i1 + "productName: " + prod + "Price" + p + "Stock: " + s);
+				System.out.println("Product ID: " + i1 + "\nProductName: " + prod + " Price: £" + p + " Stock: " + s + "\n");
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		rm.returnMenu();
 	}
 
 	public void updateProduct(int ID, String name) {
