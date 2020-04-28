@@ -2,19 +2,25 @@ package com.qa.menus;
 
 import java.util.Scanner;
 
+import com.qa.connection.DBcon;
+import com.qa.main.Logic;
 import com.qa.tables.Orders;
 
 public class OrdersMenu {
 	int orderID = 0;
 	int userID = 0;
+	DBcon connection = null;
+	
+	public OrdersMenu(DBcon connPassed) {
+		connection = connPassed;		
+	}
 
-
-	public void ordersMenu() {
-		Orders o = new Orders();
+	public void orderMenu() {
+		Orders o = new Orders(connection);
+		boolean exit = false;
 		Scanner sc = new Scanner(System.in);
-
-		//o.connect();
-		System.out.println("Please Select an option: Create[1], Read[2], Update[3], Delete[4]");
+		do {
+		System.out.println("Please Select an option:\n1 - Create a new order\n2 - View existing orders\n3 - Update an order\n4 - Delete an order\n5 - Return");
 		int o1 = sc.nextInt();
 		System.out.println();
 		sc.nextLine();
@@ -33,10 +39,7 @@ public class OrdersMenu {
 			o.createOrder(orderID, pID, uID, quant, price);
 			break;
 		case 2:
-			o.readOrder();
-//			System.out.println("Press enter to return to menu");
-//			sc.nextLine();
-			
+			o.readOrder();	
 			break;
 		case 3:
 			System.out.println("Please enter your orderID: ");
@@ -52,7 +55,16 @@ public class OrdersMenu {
 			int idDel = sc.nextInt();
 			o.deleteOrder(idDel);
 			break;
+		case 5:
+			Logic l =Factory.getLogic(connection);
+			l.run();
+			break;
+		default:
+			System.out.println("Please enter a valid number!\n");
+			exit = true;
+			break;
 		}
+		}while(exit==true);
 	}
 
 }

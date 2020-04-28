@@ -6,24 +6,29 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import com.qa.connection.DBcon;
+import com.qa.menus.Factory;
+import com.qa.menus.ProductsMenu;
 import com.qa.menus.ReturnMenu;
+import com.qa.menus.UsersMenu;
 
 public class Products {
-	ReturnMenu rm = new ReturnMenu();
-	
+	DBcon connection = null;
 	Connection conn = null;
 	Statement stmt = null;
 	ResultSet rs = null;
-	
-	public Products() {
+	//ReturnMenu rm = new ReturnMenu(connection);
+
+	public Products(DBcon connPassed) {
+		connection = connPassed;
 		try {
-			conn = new DBcon().call();
+			conn = connection.call();
 			stmt = conn.createStatement();	
 		}catch (SQLException e) {
 			System.out.println("Error - Cannot connect to database");
 			e.printStackTrace();
 		}
 	}
+	
 	public void createProduct(int productID, String productName, double price, int stock) {
 		String create = "INSERT INTO " + "products" + " VALUES(" + productID + ",'" + productName + "'," + price + ","
 				+ stock + ")";
@@ -34,7 +39,8 @@ public class Products {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		rm.returnMenu();
+		ProductsMenu pm =Factory.getProductsMenu(connection);
+		pm.productMenu();
 	}
 
 	public void readProduct() {
@@ -60,10 +66,11 @@ public class Products {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		rm.returnMenu();
+		ProductsMenu pm =Factory.getProductsMenu(connection);
+		pm.productMenu();
 	}
 
-	public void updateProduct(int ID, String name) {
+	public void updateProductName(int ID, String name) {
 		String update = "update products" + " set productName='" + name + "' where productID=" + ID;
 		try {
 			stmt.executeUpdate(update);
@@ -73,17 +80,46 @@ public class Products {
 			System.out.println("error!");
 			e.printStackTrace();
 		}
+		ProductsMenu pm =Factory.getProductsMenu(connection);
+		pm.productMenu();
+	}
+	public void updateProductPrice(int ID, double price) {
+		String update = "update products" + " set price='" + price + "' where productID=" + ID;
+		try {
+			stmt.executeUpdate(update);
+			System.out.println("Product Updated");
+		} catch (SQLException e) {
+			System.out.println("Error!");
+			e.printStackTrace();
+		}
+		ProductsMenu pm =Factory.getProductsMenu(connection);
+		pm.productMenu();
+	}
+	
+	public void updateProductStock(int ID, int stock) {
+		String update = "update products" + " set stock='" + stock + "' where productID=" + ID;
+		try {
+			stmt.executeUpdate(update);
+			System.out.println("Product Updated");
+		} catch (SQLException e) {
+			System.out.println("Error!");
+			e.printStackTrace();
+		}
+		ProductsMenu pm =Factory.getProductsMenu(connection);
+		pm.productMenu();
 	}
 
 	public void deleteProduct(int ID) {
 		String delete = "DELETE FROM " + "products" + " WHERE productID=" + ID;
 		try {
 			stmt.executeUpdate(delete);
-			System.out.println("product deleted");
+			System.out.println("Product Deleted");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		ProductsMenu pm =Factory.getProductsMenu(connection);
+		pm.productMenu();
 	}
 
 

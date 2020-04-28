@@ -4,18 +4,22 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
 import com.qa.connection.DBcon;
+import com.qa.menus.Factory;
+import com.qa.menus.OrdersMenu;
+import com.qa.menus.ReturnMenu;
+import com.qa.menus.UsersMenu;
 
 public class Orders {
-	
+	DBcon connection = null;
 	Connection conn = null;
 	Statement stmt = null;
 	ResultSet rs = null;
-	
-	public Orders() {
+
+	public Orders(DBcon connPassed) {
+		connection = connPassed;
 		try {
-			conn = new DBcon().call();
+			conn = connection.call();
 			stmt = conn.createStatement();	
 		}catch (SQLException e) {
 			System.out.println("Error - Cannot connect to database");
@@ -27,12 +31,13 @@ public class Orders {
 				"," + price + ")";
 		try {
 			stmt.executeUpdate(create);
-			System.out.println("order added");
+			System.out.println("Order Added");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		OrdersMenu om =Factory.getOrdersMenu(connection);
+		om.orderMenu();
 	}
 
 	public void readOrder() {
@@ -51,36 +56,46 @@ public class Orders {
 				int i3 = rs.getInt("userID");
 				int q = rs.getInt("quantity");
 				Double pr = rs.getDouble("price");
-				System.out.println("Order ID: " + i1 + "productID: " + i2 + "userID: " + i3 + "quantity: " + q + "Price" + pr);
+				System.out.println("Order ID: " + i1 + "\nProductID: " + i2 + " UserID: " + i3 + " Quantity: " + q + " Price" + pr);
 
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		OrdersMenu om =Factory.getOrdersMenu(connection);
+		om.orderMenu();
 	}
+//	
+//	public void readPrice() {
+//		String read = "SELECT price from orders";
+//	}
 
 	public void updateOrder(int ID, int quantity) {
 		String update = "update orders" + " set quantity='" + quantity + "' where orderID=" + ID;
 		try {
 			stmt.executeUpdate(update);
-			System.out.println("order updated");
+			System.out.println("Order Updated");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			System.out.println("error!");
+			System.out.println("Error!");
 			e.printStackTrace();
 		}
+		OrdersMenu om =Factory.getOrdersMenu(connection);
+		om.orderMenu();
 	}
 
 	public void deleteOrder(int ID) {
 		String delete = "DELETE FROM " + "orders" + " WHERE orderID=" + ID;
 		try {
 			stmt.executeUpdate(delete);
-			System.out.println("order deleted");
+			System.out.println("Order deleted");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		OrdersMenu om =Factory.getOrdersMenu(connection);
+		om.orderMenu();
 	}
 
 }

@@ -9,26 +9,33 @@ import java.util.Scanner;
 
 import com.qa.connection.DBcon;
 import com.qa.main.Logic;
+import com.qa.menus.Factory;
 import com.qa.menus.ReturnMenu;
+import com.qa.menus.UsersMenu;
 
 public class Users {
-	ReturnMenu rm = new ReturnMenu();
+	DBcon connection = null;
 	Connection conn = null;
 	Statement stmt = null;
 	ResultSet rs = null;
+	ReturnMenu rm = new ReturnMenu(connection);
+
+	public Users(DBcon connPassed) {
+		connection = connPassed;
+		
+			conn = connection.call();
+			//stmt = conn.createStatement();
+			stmt = connPassed.getStmt();
+		}
 	
-	public Users() {
+	public void close() {
 		try {
-			conn = new DBcon().call();
-			stmt = conn.createStatement();	
-		}catch (SQLException e) {
-			System.out.println("Error - Cannot connect to database");
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	
-	
-	
 	public void createUser(int userID, String userName, String password, String firstName, String lastName) {
 		String create = "INSERT INTO " + "users" + " VALUES(" + userID + ",'" + userName + "','" + password + "','"
 				+ firstName + "','" + lastName + "')";
@@ -39,13 +46,8 @@ public class Users {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		rm.returnMenu();
-//		Scanner sc = new Scanner(System.in);
-//		System.out.println("Press enter to return to menu");
-//		sc.nextLine();
-//		Logic l = new Logic();
-//		l.run();
-		
+		UsersMenu u =Factory.getUserMenu(connection);
+		u.userMenu();
 	}
 
 	public void readUser() {
@@ -64,19 +66,23 @@ public class Users {
 				String pass = rs.getString("password");
 				String first = rs.getString("firstName");
 				String last = rs.getString("lastName");
-				System.out.println("User ID: " + i1 + "userName: " + user1 + "Password" + pass + "First Name: " + first
-						+ "Last Name: " + last);
+				System.out.println("User ID: " + i1 + "\nUserName: " + user1 + " Password" + pass + " First Name: " + first
+						+ " Last Name: " + last);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		
-		rm.returnMenu();
-	
+		} //garbage collection 
+		stmt = null;
+		//Factory.getLogic(connection);
+		//UsersMenu um = new UsersMenu(connection);
+		//um.userMenu();
+		//rm.returnMenu();
+		UsersMenu u =Factory.getUserMenu(connection);
+		u.userMenu();	
 	}
 
-	public void updateUser(int ID, String name) {
+	public void updateUserName(int ID, String name) {
 		String update = "update users" + " set userName='" + name + "' where userID=" + ID;
 		try {
 			stmt.executeUpdate(update);
@@ -86,6 +92,50 @@ public class Users {
 			System.out.println("error!");
 			e.printStackTrace();
 		}
+		UsersMenu u =Factory.getUserMenu(connection);
+		u.userMenu();		
+	}
+	
+	public void updateUserPass(int ID, String password) {
+		String update = "update users" + " set password='" + password + "' where userID=" + ID;
+		try {
+			stmt.executeUpdate(update);
+			System.out.println("User updated");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("Error!");
+			e.printStackTrace();
+		}
+		UsersMenu u =Factory.getUserMenu(connection);
+		u.userMenu();
+		}
+	
+	public void updateFname(int ID, String firstName) {
+		String update = "update users" + " set firstName='" + firstName + "' where userID=" + ID;
+		try {
+			stmt.executeUpdate(update);
+			System.out.println("User updated");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("Error!");
+			e.printStackTrace();
+		}
+		UsersMenu u =Factory.getUserMenu(connection);
+		u.userMenu();
+	}
+	
+	public void updateLname(int ID, String lastName) {
+		String update = "update users" + " set lastName='" + lastName + "' where userID=" + ID;
+		try {
+			stmt.executeUpdate(update);
+			System.out.println("User updated");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("Error!");
+			e.printStackTrace();
+		}
+		UsersMenu u =Factory.getUserMenu(connection);
+		u.userMenu();
 	}
 
 	public void deleteUser(int ID) {
@@ -97,6 +147,8 @@ public class Users {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		UsersMenu u =Factory.getUserMenu(connection);
+		u.userMenu();
 	}
 
 }
