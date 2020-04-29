@@ -35,7 +35,10 @@ public class OrdersMenu {
 			System.out.println("\nPlease enter total price:");
 			double price = sc.nextDouble();
 			System.out.println();
-			sc.nextLine();
+			//double price = o.readPrice(pID,quant);
+			//System.out.println(price);
+			//take input and pass from here
+			//sc.nextLine();
 			o.createOrder(orderID, pID, uID, quant, price);
 			break;
 		case 2:

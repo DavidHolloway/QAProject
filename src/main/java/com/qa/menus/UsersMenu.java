@@ -39,9 +39,11 @@ public class UsersMenu {
 			System.out.println("\nPlease enter your last name: ");
 			String lName = sc.nextLine();
 			u.createUser(userID, user, pass, fName, lName);
+			menuReturn();
 			break;
 		case 2:
 			u.readUser();
+			menuReturn();
 			break;
 		case 3:
 			boolean b = false;
@@ -60,6 +62,7 @@ public class UsersMenu {
 				System.out.println("Please enter a new username: ");
 				String name = sc.nextLine();
 				u.updateUserName(id, name);
+				menuReturn();
 				break;
 			case 2:
 				System.out.println("Please enter the ID of the user you would like to update: ");
@@ -69,6 +72,7 @@ public class UsersMenu {
 				System.out.println("Please enter the new password: ");
 				String up = sc.nextLine();
 				u.updateUserPass(id2, up);
+				menuReturn();
 				break;
 			case 3:
 				System.out.println("Please enter the ID of the user you would like to update: ");
@@ -78,6 +82,7 @@ public class UsersMenu {
 				System.out.println("Please enter the new first name: ");
 				String fn = sc.nextLine();
 				u.updateFname(id3, fn);
+				menuReturn();
 				break;
 			case 4:
 				System.out.println("Please enter the ID of the user you would like to update: ");
@@ -87,6 +92,7 @@ public class UsersMenu {
 				System.out.println("Please enter the new last name: ");
 				String ln = sc.nextLine();
 				u.updateFname(id4, ln);
+				menuReturn();
 				break;
 			case 5:
 				Logic l =Factory.getLogic(connection);
@@ -102,6 +108,7 @@ public class UsersMenu {
 			System.out.println("Please enter the userID you would like to delete: ");
 			int idDel = sc.nextInt();
 			u.deleteUser(idDel);
+			menuReturn();
 			break;
 		case 5:
 			Logic l =Factory.getLogic(connection);
@@ -115,6 +122,10 @@ public class UsersMenu {
 		}while(exit == true);
 	}
 
+	public void menuReturn() {
+		UsersMenu um =Factory.getUserMenu(connection);
+		um.userMenu();
+	}
 	
 
 }

@@ -38,9 +38,11 @@ public class ProductsMenu {
 			System.out.println();
 			sc.nextLine();
 			p.createProduct(productID, prod, pr, st);
+			returnMenu();
 			break;
 		case 2:
 			p.readProduct();
+			returnMenu();
 			break;
 		case 3:
 			System.out.println(
@@ -57,6 +59,7 @@ public class ProductsMenu {
 				System.out.println("Please enter the new product name: ");
 				String name = sc.nextLine();
 				p.updateProductName(id, name);
+				returnMenu();
 				break;
 			case 2:
 				System.out.println("Please enter the ID of the product you would like to update: ");
@@ -66,6 +69,7 @@ public class ProductsMenu {
 				System.out.println("Please enter the new product price: ");
 				double np = sc.nextDouble();
 				p.updateProductPrice(id2, np);
+				returnMenu();
 				break;
 			case 3:
 				System.out.println("Please enter the ID of the product you would like to update: ");
@@ -73,8 +77,9 @@ public class ProductsMenu {
 				System.out.println();
 				sc.nextLine();
 				System.out.println("Please enter the new stock level of the product: ");
-				double ns = sc.nextDouble();
-				p.updateProductPrice(id3, ns);
+				int stck = sc.nextInt();
+				p.updateProductStock(id3, stck);
+				returnMenu();
 				break;
 			default:
 				System.out.println("Please enter a valid number");
@@ -85,6 +90,7 @@ public class ProductsMenu {
 			System.out.println("Please enter the productID of the item you wish to delete: ");
 			int idDel = sc.nextInt();
 			p.deleteProduct(idDel);
+			returnMenu();
 			break;
 		case 5:
 			Logic l =Factory.getLogic(connection);
@@ -96,6 +102,11 @@ public class ProductsMenu {
 			break;
 		}
 		}while(exit == true);
+	}
+	
+	public void returnMenu() {
+		ProductsMenu pm =Factory.getProductsMenu(connection);
+		pm.productMenu();
 	}
 
 }

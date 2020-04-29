@@ -66,10 +66,20 @@ public class Orders {
 		OrdersMenu om =Factory.getOrdersMenu(connection);
 		om.orderMenu();
 	}
+	
+//	public double readPrice(int productID, int quantity) {
+//		double value;
+//		double sum;
+//		String read = "SELECT price from products where productID=" + productID;
+//		value = Double.parseDouble(read);
+//		sum = (value*quantity);
+//		return sum;
 //	
-//	public void readPrice() {
-//		String read = "SELECT price from orders";
 //	}
+	
+	// use sql sum 
+	//function add item to order 
+	//take item ID get price
 
 	public void updateOrder(int ID, int quantity) {
 		String update = "update orders" + " set quantity='" + quantity + "' where orderID=" + ID;

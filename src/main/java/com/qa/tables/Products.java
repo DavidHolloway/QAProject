@@ -39,8 +39,7 @@ public class Products {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		ProductsMenu pm =Factory.getProductsMenu(connection);
-		pm.productMenu();
+		
 	}
 
 	public void readProduct() {
@@ -66,8 +65,7 @@ public class Products {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		ProductsMenu pm =Factory.getProductsMenu(connection);
-		pm.productMenu();
+		
 	}
 
 	public void updateProductName(int ID, String name) {
@@ -92,8 +90,7 @@ public class Products {
 			System.out.println("Error!");
 			e.printStackTrace();
 		}
-		ProductsMenu pm =Factory.getProductsMenu(connection);
-		pm.productMenu();
+		
 	}
 	
 	public void updateProductStock(int ID, int stock) {
@@ -105,8 +102,6 @@ public class Products {
 			System.out.println("Error!");
 			e.printStackTrace();
 		}
-		ProductsMenu pm =Factory.getProductsMenu(connection);
-		pm.productMenu();
 	}
 
 	public void deleteProduct(int ID) {
@@ -118,8 +113,6 @@ public class Products {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		ProductsMenu pm =Factory.getProductsMenu(connection);
-		pm.productMenu();
 	}
 
 

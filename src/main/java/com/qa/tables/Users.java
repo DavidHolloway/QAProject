@@ -21,13 +21,18 @@ public class Users {
 	ReturnMenu rm = new ReturnMenu(connection);
 
 	public Users(DBcon connPassed) {
-		connection = connPassed;
-		
+			connection = connPassed;		
 			conn = connection.call();
 			//stmt = conn.createStatement();
 			stmt = connPassed.getStmt();
 		}
 	
+	
+	public Users() {
+		
+	}
+
+
 	public void close() {
 		try {
 			conn.close();
@@ -37,18 +42,20 @@ public class Users {
 		}
 	}
 	public void createUser(int userID, String userName, String password, String firstName, String lastName) {
+		String myStr = "";
 		String create = "INSERT INTO " + "users" + " VALUES(" + userID + ",'" + userName + "','" + password + "','"
 				+ firstName + "','" + lastName + "')";
 		try {
 			stmt.executeUpdate(create);
 			System.out.println("Record created!");
+			myStr = "okay";
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
+			myStr = "failed";
 			e.printStackTrace();
 		}
-		UsersMenu u =Factory.getUserMenu(connection);
-		u.userMenu();
-	}
+		}
 
 	public void readUser() {
 		String read = "SELECT userID,userName,password,firstName,lastName from users";
@@ -66,7 +73,7 @@ public class Users {
 				String pass = rs.getString("password");
 				String first = rs.getString("firstName");
 				String last = rs.getString("lastName");
-				System.out.println("User ID: " + i1 + "\nUserName: " + user1 + " Password" + pass + " First Name: " + first
+				System.out.println("User ID: " + i1 + "\nUserName: " + user1 + " Password " + pass + " First Name: " + first
 						+ " Last Name: " + last);
 			}
 		} catch (SQLException e) {
@@ -74,12 +81,7 @@ public class Users {
 			e.printStackTrace();
 		} //garbage collection 
 		stmt = null;
-		//Factory.getLogic(connection);
-		//UsersMenu um = new UsersMenu(connection);
-		//um.userMenu();
-		//rm.returnMenu();
-		UsersMenu u =Factory.getUserMenu(connection);
-		u.userMenu();	
+		
 	}
 
 	public void updateUserName(int ID, String name) {
@@ -92,8 +94,7 @@ public class Users {
 			System.out.println("error!");
 			e.printStackTrace();
 		}
-		UsersMenu u =Factory.getUserMenu(connection);
-		u.userMenu();		
+			
 	}
 	
 	public void updateUserPass(int ID, String password) {
@@ -106,8 +107,7 @@ public class Users {
 			System.out.println("Error!");
 			e.printStackTrace();
 		}
-		UsersMenu u =Factory.getUserMenu(connection);
-		u.userMenu();
+		
 		}
 	
 	public void updateFname(int ID, String firstName) {
@@ -120,8 +120,7 @@ public class Users {
 			System.out.println("Error!");
 			e.printStackTrace();
 		}
-		UsersMenu u =Factory.getUserMenu(connection);
-		u.userMenu();
+		
 	}
 	
 	public void updateLname(int ID, String lastName) {
@@ -134,8 +133,7 @@ public class Users {
 			System.out.println("Error!");
 			e.printStackTrace();
 		}
-		UsersMenu u =Factory.getUserMenu(connection);
-		u.userMenu();
+		
 	}
 
 	public void deleteUser(int ID) {
@@ -147,8 +145,7 @@ public class Users {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		UsersMenu u =Factory.getUserMenu(connection);
-		u.userMenu();
+		
 	}
 
 }
