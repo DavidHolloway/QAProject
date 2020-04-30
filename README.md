@@ -1,6 +1,7 @@
 # QAProject
 
 Inventory Managment System
+
 This project involved creating a relational database using three tables (Users,Products,Orders) in SQL. The Database was then accessed and manipulated using user inputs through a console java application. This project helped encapsulate all fundamental modules learnt over the first 5 weeks of training. 
 
 Getting Started
