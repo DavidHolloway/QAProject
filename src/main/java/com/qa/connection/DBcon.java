@@ -1,5 +1,6 @@
 package com.qa.connection;
 
+import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -15,6 +16,10 @@ public class DBcon {
 	public final String PASS = "root";
 
 	Connection conn = null;
+	Statement stmtTest = null;
+	Statement stmt = null;
+
+
 //	public Connection connect() {
 //		try {
 //			Class.forName(JDBC_DRIVER);
@@ -67,6 +72,15 @@ public class DBcon {
 		return conn;
 	}
 	
+	public Statement getStmtTest() {
+		try {
+			stmtTest = conn.createStatement();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return stmtTest;
+	}
+	
 	public Statement getStmt() {
 		Statement stmt = null;
 		try {
@@ -77,4 +91,16 @@ public class DBcon {
 		}
 		return stmt;
 	}
+	
+	  public static void closeStmt(Statement stmt) {
+	        try {
+	            if (null != stmt) {
+	                stmt.close();
+	                stmt = null;
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+
+	        }
+	    }
 }

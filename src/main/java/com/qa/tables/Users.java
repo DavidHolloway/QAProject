@@ -1,5 +1,6 @@
 package com.qa.tables;
 
+import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 
@@ -25,6 +26,7 @@ public class Users {
 			conn = connection.call();
 			//stmt = conn.createStatement();
 			stmt = connPassed.getStmt();
+			
 		}
 	
 	
