@@ -136,25 +136,6 @@ public class OrdersTest {
 			fail();
 		}
 	}
-//	@Test
-//	public void updateProduct() {
-//		p.updateProductName(5, "iphone7");
-//		String read = "SELECT productID,productName from products";
-//		try {
-//			System.out.println("test");
-//            rs = stmtTest.executeQuery(read);
-//            while (rs.next()) {
-//				String pn = rs.getString("productName");
-//                assertEquals("iphone7", pn);
-//                //assertEquals("lastName5", last);
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//            fail();
-//        }
-//		
-//		
-//	}
 	
 	@After
 	public void removeCreate() {

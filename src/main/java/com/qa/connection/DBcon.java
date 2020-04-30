@@ -19,32 +19,6 @@ public class DBcon {
 	Statement stmtTest = null;
 	Statement stmt = null;
 
-
-//	public Connection connect() {
-//		try {
-//			Class.forName(JDBC_DRIVER);
-//		} catch (ClassNotFoundException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		System.out.println("Starting connection to database");
-//		try {
-//			conn = DriverManager.getConnection(DB_URL, USER, PASS);
-//			// System.out.println("connected!!");
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		try {
-//			stmt = conn.createStatement();
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		return conn;
-//	}
-	
-	//inventorymanagmentsys
 	public DBcon(String database) {
 		
 		DB_URL = "jdbc:mysql://34.89.47.160/"+ database;
