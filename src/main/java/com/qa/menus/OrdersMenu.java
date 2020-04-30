@@ -40,9 +40,11 @@ public class OrdersMenu {
 			//take input and pass from here
 			//sc.nextLine();
 			o.createOrder(orderID, pID, uID, quant, price);
+			returnMenu();
 			break;
 		case 2:
 			o.readOrder();	
+			returnMenu();
 			break;
 		case 3:
 			System.out.println("Please enter your orderID: ");
@@ -52,22 +54,31 @@ public class OrdersMenu {
 			System.out.println("\nPlease enter the new order quantity: ");
 			int quant2 = sc.nextInt();
 			o.updateOrder(id, quant2);
+			returnMenu();
 			break;
 		case 4:
 			System.out.println("Please enter your orderID to delete: ");
 			int idDel = sc.nextInt();
 			o.deleteOrder(idDel);
+			returnMenu();
 			break;
 		case 5:
 			Logic l =Factory.getLogic(connection);
 			l.run();
+			returnMenu();
 			break;
 		default:
 			System.out.println("Please enter a valid number!\n");
 			exit = true;
+			returnMenu();
 			break;
 		}
 		}while(exit==true);
+	}
+	
+	public void returnMenu() {
+		OrdersMenu om =Factory.getOrdersMenu(connection);
+		om.orderMenu();;
 	}
 
 }

@@ -49,30 +49,44 @@ public class UsersTest {
 	
 	@Before
 	public void init() {
-		u.createUser(5, "user5", "12345", "firstName5", "lastName5");
+		String insert1 = ("INSERT INTO " + "users" + "(userID, userName, password,"
+				+ " firstName, lastName)" + "VALUES (1, \"userName1\", \"password1\", "
+						+ "\"firstName1\", \"lastName1\");");
+		try {
+			stmtTest.executeUpdate(insert1);
+			System.out.println(rs);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
+
 	}
 	
 	@Test
 	public void createTest() {
+		
+		//u.createUser(5, "user5", "12345", "firstName5", "lastName5");
 
-		String readall = "SELECT * FROM users WHERE firstName='firstName5'";
+		String readall = "SELECT * FROM users WHERE userID=1";
         try {
             rs = stmtTest.executeQuery(readall);
             while (rs.next()) {
                 String un = rs.getString("userName");
-                assertEquals("user5", un);
+                assertEquals("userName1", un);
             }
         } catch (SQLException e) {
             e.printStackTrace();
             fail();
+        
         }
+        
 	}	
 	
 	@Test
 	public void readUser() {
 		u.readUser();
-		String read = "SELECT userID,userName,password,firstName,lastName from users";
+		String read = "SELECT * from users where userID= 1";
 		 try {
 	            rs = stmtTest.executeQuery(read);
 	            while (rs.next()) {
@@ -80,10 +94,10 @@ public class UsersTest {
 	                String pass = rs.getString("password");
 					String first = rs.getString("firstName");
 					String last = rs.getString("lastName");
-	                assertEquals("user5", un);
-	                assertEquals("12345", pass);
-	                assertEquals("firstName5", first);
-	                assertEquals("lastName5", last);
+	                assertEquals("userName1", un);
+	                assertEquals("password1", pass);
+	                assertEquals("firstName1", first);
+	                assertEquals("lastName1", last);
 
 	            }
 	        } catch (SQLException e) {
@@ -117,6 +131,17 @@ public class UsersTest {
 //		
 //	}
 	
+	@Test
+	public void deleteCust() {
+		String delete = "DELETE FROM " + "users" + " WHERE userID=" + 5;
+		try {
+			stmtTest.executeUpdate(delete);
+			System.out.println("User Deleted");
+		} catch (SQLException e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
 	@After
 	public void removeCreate() {
 		
@@ -139,7 +164,12 @@ public class UsersTest {
 	
 	@AfterClass
 	public static void endConnection() {
-		conn = null;
+		try {
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 

@@ -56,20 +56,43 @@ public class OrdersTest {
 	
 	@Before
 	public void init() {
-		u.createUser(1, "userName1", "password1", "firstName1", "lastName1");
-		p.createProduct(1, "productName1", 19.99, 5);
-		o.createOrder(1, 1, 1, 5, 19.99);
+		//u.createUser(1, "userName1", "password1", "firstName1", "lastName1");
+		//p.createProduct(1, "productName1", 19.99, 5);
+		
+		String insert1 = ("INSERT INTO " + "users" + "(userID, userName, password,"
+				+ " firstName, lastName)" + "VALUES (1, \"userName1\", \"password1\", "
+						+ "\"firstName1\", \"lastName1\");");
+		try {
+			stmtTest.executeUpdate(insert1);
+			System.out.println(rs);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String insert2 = ("INSERT INTO " + "products" + "(productID, productName, price, stock)" 
+		+ " VALUES (1, \"product1\", 19.99,5);");
+		try {
+			stmtTest.executeUpdate(insert2);
+			System.out.println(rs);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	@Test
 	public void createOrder() {
+	
+				
+				//INSERT INTO users (userID, userName, password, firstName, lastName) VALUES (1, "user1", "password","user","test");
+		o.createOrder(1, 1, 1, 5, 19.99);
 
 		String readall = "SELECT * FROM orders WHERE orderID=1";
         try {
             rs = stmtTest.executeQuery(readall);
             while (rs.next()) {
                 int st  = rs.getInt("quantity");
-                assertEquals("5", st);
+                assertEquals(5, st);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -80,7 +103,7 @@ public class OrdersTest {
 	@Test
 	public void readOrder() {
 		o.readOrder();
-		String read = "SELECT orderID,productID,userID,quantity,price from orders";
+		String read = "SELECT * from orders";
 		 try {
 	            rs = stmtTest.executeQuery(read);
 	            while (rs.next()) {
@@ -136,10 +159,24 @@ public class OrdersTest {
 	@After
 	public void removeCreate() {
 		
-		String deleteAll = "DELETE FROM order where orderID=1";
+		String deleteAll = "DELETE FROM orders where orderID=1";
 		System.out.println(deleteAll);
 		try {
 			stmtTest.executeUpdate(deleteAll);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String deleteAll1 = "DELETE FROM users where userID=1";
+		try {
+			stmtTest.executeUpdate(deleteAll1);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String deleteAll2 = "DELETE FROM products where productID=1";
+		try {
+			stmtTest.executeUpdate(deleteAll2);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -154,7 +191,13 @@ public class OrdersTest {
 	
 	@AfterClass
 	public static void endConnection() {
-		conn = null;
+		//conn = null;
+		try {
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 

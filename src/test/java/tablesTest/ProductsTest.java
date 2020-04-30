@@ -142,7 +142,13 @@ public class ProductsTest {
 	
 	@AfterClass
 	public static void endConnection() {
-		conn = null;
+		//conn = null;
+		try {
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 

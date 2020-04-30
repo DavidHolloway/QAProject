@@ -46,7 +46,8 @@ public class DBcon {
 	
 	//inventorymanagmentsys
 	public DBcon(String database) {
-		DB_URL = "jdbc:mysql://localhost:3306/"+database+"?useSSL=false";
+		
+		DB_URL = "jdbc:mysql://34.89.47.160/"+ database;
 		try {
 			Class.forName(JDBC_DRIVER);
 			System.out.println("Connecting to database");
@@ -63,7 +64,7 @@ public class DBcon {
 		try {
 			Class.forName(JDBC_DRIVER);
 			conn = DriverManager.getConnection(DB_URL, USER, PASS);
-			System.out.println("Connected\n");
+			//System.out.println("Connected");
 		}catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}catch (SQLException e) {
@@ -73,6 +74,8 @@ public class DBcon {
 	}
 	
 	public Statement getStmtTest() {
+		Statement stmtTest = null;
+
 		try {
 			stmtTest = conn.createStatement();
 		} catch (SQLException e) {

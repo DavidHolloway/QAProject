@@ -25,16 +25,9 @@ public class Users {
 			connection = connPassed;		
 			conn = connection.call();
 			//stmt = conn.createStatement();
-			stmt = connPassed.getStmt();
-			
+			stmt = connPassed.getStmt();			
 		}
 	
-	
-	public Users() {
-		
-	}
-
-
 	public void close() {
 		try {
 			conn.close();

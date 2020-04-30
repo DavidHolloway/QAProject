@@ -36,8 +36,6 @@ public class Orders {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		OrdersMenu om =Factory.getOrdersMenu(connection);
-		om.orderMenu();
 	}
 
 	public void readOrder() {
@@ -63,8 +61,6 @@ public class Orders {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		OrdersMenu om =Factory.getOrdersMenu(connection);
-		om.orderMenu();
 	}
 	
 //	public double readPrice(int productID, int quantity) {
@@ -91,8 +87,6 @@ public class Orders {
 			System.out.println("Error!");
 			e.printStackTrace();
 		}
-		OrdersMenu om =Factory.getOrdersMenu(connection);
-		om.orderMenu();
 	}
 
 	public void deleteOrder(int ID) {
@@ -104,8 +98,7 @@ public class Orders {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		OrdersMenu om =Factory.getOrdersMenu(connection);
-		om.orderMenu();
+
 	}
 
 }
