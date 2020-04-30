@@ -1,0 +1,11 @@
+com\qa\menus\Factory.class
+com\qa\tables\Orders.class
+com\qa\main\Logic.class
+com\qa\main\Runner.class
+com\qa\menus\ProductsMenu.class
+com\qa\menus\OrdersMenu.class
+com\qa\menus\UsersMenu.class
+com\qa\connection\DBcon.class
+com\qa\menus\ReturnMenu.class
+com\qa\tables\Users.class
+com\qa\tables\Products.class

@@ -106,30 +106,83 @@ public class UsersTest {
 	        }
 	}
 	
-//	@Test
-//	public void updateUser() {
-//		u.updateFname(5, "newfirstName5");
-//		String read = "SELECT userID,firstName from users";
-//		try {
-//            rs = stmtTest.executeQuery(read);
-//            while (rs.next()) {
-//                //String un = rs.getString("userName");
-//                //String pass = rs.getString("password");
-//				String first = rs.getString("firstName");
-//				//String last = rs.getString("lastName");
-//               // assertEquals("user5", un);
-//               // assertEquals("12345", pass);
-//                assertEquals("newfirstName5", first);
-//                //assertEquals("lastName5", last);
-//
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//            fail();
-//        }
-//		
-//		
-//	}
+	@Test
+	public void updateUser() {
+		u.updateFname(1, "newfirstName5");
+		String read = "SELECT userID,firstName from users where userID= 1";
+		try {
+            rs = stmtTest.executeQuery(read);
+            while (rs.next()) {
+                //String un = rs.getString("userName");
+                //String pass = rs.getString("password");
+				String first = rs.getString("firstName");
+				//String last = rs.getString("lastName");
+               // assertEquals("user5", un);
+               // assertEquals("12345", pass);
+                assertEquals("newfirstName5", first);
+                //assertEquals("lastName5", last);
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            fail();
+        }
+		
+		
+	}
+	
+	@Test
+	public void updateLastName() {
+		u.updateLname(1, "newLastName");
+		String read = "SELECT userID,lastName from users where userID= 1";
+		try {
+            rs = stmtTest.executeQuery(read);
+            while (rs.next()) {
+				String ln = rs.getString("lastName");
+                assertEquals("newLastName", ln);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            fail();
+        }
+		
+		
+	}
+	
+	@Test
+	public void updateUserName() {
+		u.updateUserName(1, "userName5");
+		String read = "SELECT userID,userName from users where userID= 1";
+		try {
+            rs = stmtTest.executeQuery(read);
+            while (rs.next()) {
+				String first = rs.getString("userName");
+                assertEquals("userName5", first);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            fail();
+        }
+		
+		
+	}
+	@Test
+	public void updatePass() {
+		u.updateUserPass(1, "newPass");
+		String read = "SELECT userID,password from users where userID= 1";
+		try {
+            rs = stmtTest.executeQuery(read);
+            while (rs.next()) {
+				String p = rs.getString("password");
+                assertEquals("newPass", p);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            fail();
+        }
+		
+		
+	}
 	
 	@Test
 	public void deleteCust() {

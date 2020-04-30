@@ -103,7 +103,7 @@ public class OrdersTest {
 	@Test
 	public void readOrder() {
 		o.readOrder();
-		String read = "SELECT * from orders";
+		String read = "SELECT * from orders where orderID= 1";
 		 try {
 	            rs = stmtTest.executeQuery(read);
 	            while (rs.next()) {

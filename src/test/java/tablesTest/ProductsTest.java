@@ -51,7 +51,8 @@ public class ProductsTest {
 	
 	@Before
 	public void init() {
-		p.createProduct(1,"iphone", 199.99, 20);
+		//p.createProduct(1,"iphone", 199.99, 20);
+		p.createProduct(2,"iphone", 199.99, 20);
 	}
 	
 	@Test
@@ -73,7 +74,7 @@ public class ProductsTest {
 	@Test
 	public void readProduct() {
 		p.readProduct();
-		String read = "SELECT productID,productName,price,stock from products";
+		String read = "SELECT productID,productName,price,stock from products where productID= 2";
 		 try {
 	            rs = stmtTest.executeQuery(read);
 	            while (rs.next()) {
@@ -91,8 +92,58 @@ public class ProductsTest {
 	}
 	
 	@Test
+	public void updateProductName() {
+		p.updateProductName(2,"newProductName");
+		String read = "SELECT productID,productName from products where productID= 2";
+		try {
+            rs = stmtTest.executeQuery(read);
+            while (rs.next()) {
+				String pn = rs.getString("productName");
+                assertEquals("newProductName", pn);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            fail();
+        }
+	}
+	
+	@Test
+	public void updateProductPrice() {
+		p.updateProductPrice(2,10.99);
+		String read = "SELECT productID,price from products where productID= 2";
+		try {
+            rs = stmtTest.executeQuery(read);
+            while (rs.next()) {
+				double pc = rs.getDouble("price");
+                assertEquals(10.99, pc,0.1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            fail();
+        }
+	}
+	
+	@Test
+	public void updateProductStock() {
+		p.updateProductStock(2,15);
+		String read = "SELECT productID,stock from products where productID= 2";
+		try {
+            rs = stmtTest.executeQuery(read);
+            while (rs.next()) {
+				int st = rs.getInt("stock");
+                assertEquals(15, st);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            fail();
+        }
+	}
+	
+	
+	
+	@Test
 	public void deleteProduct() {
-		String delete = "DELETE FROM " + "products" + " WHERE productID=" + 1;
+		String delete = "DELETE FROM " + "products" + " WHERE productID= 2";
 		try {
 			stmtTest.executeUpdate(delete);
 			System.out.println("Product Deleted");
@@ -100,44 +151,18 @@ public class ProductsTest {
 			e.printStackTrace();
 			fail();
 		}
-	}
-//	@Test
-//	public void updateProduct() {
-//		p.updateProductName(5, "iphone7");
-//		String read = "SELECT productID,productName from products";
-//		try {
-//			System.out.println("test");
-//            rs = stmtTest.executeQuery(read);
-//            while (rs.next()) {
-//				String pn = rs.getString("productName");
-//                assertEquals("iphone7", pn);
-//                //assertEquals("lastName5", last);
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//            fail();
-//        }
-//		
-//		
-//	}
-	
+	}	
 	@After
 	public void removeCreate() {
 		
-		String deleteAll = "DELETE FROM products where productID=1";
+		String deleteAll = "DELETE FROM products";
 		System.out.println(deleteAll);
 		try {
 			stmtTest.executeUpdate(deleteAll);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-
-////		statement to delete everything
-//		String deleteAll = "TRUNCATE TABLE users;";
-//		stmt.executeUpdate(deleteAll);
-////		ALTER TABLE users ALTER COLUMN auto_increment_userID RESTART WITH 0
-//		
+		}		
 	}
 	
 	@AfterClass

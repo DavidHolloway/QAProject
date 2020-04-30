@@ -1,0 +1,4 @@
+connectionTest\TestingConnection.class
+tablesTest\OrdersTest.class
+tablesTest\ProductsTest.class
+tablesTest\UsersTest.class

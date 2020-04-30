@@ -69,7 +69,8 @@ public class Products {
 	}
 
 	public void updateProductName(int ID, String name) {
-		String update = "update products" + " set productName='" + name + "' where productID=" + ID;
+		String update = "UPDATE products SET productName='" + name + "' where productID=(" + ID +")";
+		stmt = connection.getStmt();
 		try {
 			stmt.executeUpdate(update);
 			System.out.println("product updated");
@@ -78,11 +79,10 @@ public class Products {
 			System.out.println("error!");
 			e.printStackTrace();
 		}
-		ProductsMenu pm =Factory.getProductsMenu(connection);
-		pm.productMenu();
 	}
 	public void updateProductPrice(int ID, double price) {
 		String update = "update products" + " set price='" + price + "' where productID=" + ID;
+		stmt = connection.getStmt();
 		try {
 			stmt.executeUpdate(update);
 			System.out.println("Product Updated");
@@ -95,6 +95,7 @@ public class Products {
 	
 	public void updateProductStock(int ID, int stock) {
 		String update = "update products" + " set stock='" + stock + "' where productID=" + ID;
+		stmt = connection.getStmt();
 		try {
 			stmt.executeUpdate(update);
 			System.out.println("Product Updated");
@@ -106,6 +107,7 @@ public class Products {
 
 	public void deleteProduct(int ID) {
 		String delete = "DELETE FROM " + "products" + " WHERE productID=" + ID;
+		stmt = connection.getStmt();
 		try {
 			stmt.executeUpdate(delete);
 			System.out.println("Product Deleted");

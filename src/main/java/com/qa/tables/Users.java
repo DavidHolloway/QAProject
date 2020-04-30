@@ -81,6 +81,7 @@ public class Users {
 
 	public void updateUserName(int ID, String name) {
 		String update = "update users" + " set userName='" + name + "' where userID=" + ID;
+		stmt = connection.getStmt();
 		try {
 			stmt.executeUpdate(update);
 			System.out.println("Record updated");
@@ -94,6 +95,7 @@ public class Users {
 	
 	public void updateUserPass(int ID, String password) {
 		String update = "update users" + " set password='" + password + "' where userID=" + ID;
+		stmt = connection.getStmt();
 		try {
 			stmt.executeUpdate(update);
 			System.out.println("User updated");
@@ -106,7 +108,8 @@ public class Users {
 		}
 	
 	public void updateFname(int ID, String firstName) {
-		String update = "update users" + " set firstName='" + firstName + "' where userID=" + ID;
+		String update = "UPDATE users SET firstName='" + firstName + "' WHERE userID=(" + ID +")";
+		stmt = connection.getStmt();
 		try {
 			stmt.executeUpdate(update);
 			System.out.println("User updated");
@@ -120,6 +123,7 @@ public class Users {
 	
 	public void updateLname(int ID, String lastName) {
 		String update = "update users" + " set lastName='" + lastName + "' where userID=" + ID;
+		stmt = connection.getStmt();
 		try {
 			stmt.executeUpdate(update);
 			System.out.println("User updated");
@@ -133,6 +137,7 @@ public class Users {
 
 	public void deleteUser(int ID) {
 		String delete = "DELETE FROM " + "users" + " WHERE userID=" + ID;
+		stmt = connection.getStmt();
 		try {
 			stmt.executeUpdate(delete);
 			System.out.println("record deleted");
